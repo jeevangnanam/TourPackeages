@@ -282,80 +282,63 @@ class PackagesController extends AppController {
         }*/
       //debug($this->params);		
         App::import('Core', 'Sanitize');
-        $q = Sanitize::clean($this->params['named']['q']);
-        $city = Sanitize::clean($this->params['named']['city']);
-        $duration = Sanitize::clean($this->params['named']['duration']);
+	//debug($this->params['url']);
+        $packageCategory = Sanitize::clean($this->params['url']['package']);      
+        $arrival = Sanitize::clean($this->params['url']['arrival']);
+		$departure = Sanitize::clean($this->params['url']['departure']);
+		$adults = Sanitize::clean($this->params['url']['adults']);
+		$children = Sanitize::clean($this->params['url']['children']);
+		$hotelType = Sanitize::clean($this->params['url']['hotel_type']);
         
-        $amount = Sanitize::clean($this->params['named']['amount']);
-	$date_range = Sanitize::clean($this->params['named']['date_range']);
-       
+
+		//Little additional validity check on arrival date.
 		
-		$amountRange = explode('-',trim($amount));
-                $amount11 = str_replace('$','',$amountRange[0]).'</br>';
-                $amountnew= explode('%',trim($amount11));
-                $amount1=$amountnew[0];
-                $amount2new = explode('$',trim($amountRange[1]));
-                $amount2 = $amount2new[1];
-               // echo $amount2 = str_replace('$','',$amountRange[1]);
-                $dateRange = explode(' to ',trim($date_range));
-                
-                
-		$dateRange1 = explode('-',trim($dateRange[0]));
-                $dateRange11 = explode('%20',trim($dateRange[0]));
-                //debug($dateRange11);
-                $date1 = $dateRange11[1];
-	        $date2 = @$dateRange11[4];
-               
-	        $diff=(int)$date1-(int)$date2;
-        if(empty($q)){
-        	$q = 0;
-        	$search_condition = array('Location.name LIKE' => '%' . $city . '%', 
-        	'Package.duration >= ' => abs($diff), 'Package.price between ? and ?' => array($amount1,$amount2) ) ;
+		 if(!empty($arrival)){
+			 
+			 $parsedArrivalDate =  date_parse($arrival);
+			 $arrivalDateYear  =  $parsedArrivalDate['year'];
+			 $arrivalDateMonth =  $parsedArrivalDate['month'];
+			 $arrivalDateDay   =  $parsedArrivalDate['day'];
+			 
+			   if(!checkdate($arrivalDateMonth,$arrivalDateDay,$arrivalDateYear)){
+				   die('Date format is not valid');
+				   }
+			 }
+
+/*var_dump($packageCategory);
+var_dump($arrival);
+var_dump($departure);
+var_dump($adults);
+var_dump($children);
+var_dump($hotelType);*/
+
+        if(empty($packageCategory)){
+        	$searchConditions = array('Package.status' => 'APPROVED');
         }else{
-        	if(!empty($diff)){
-	        	$search_condition = array('PackageCategory.id = '.$q , 
-	        	'Location.name LIKE' => '%' . $city . '%', 
-	        	'Package.duration >= ' => abs($diff), 'Package.price between ? and ?' => array($amount1,$amount2)) ;
-        	}else{
-        		$search_condition = array('PackageCategory.id = '.$q , 
-	        	'Location.name LIKE' => '%' . $city . '%', 
-	        	) ;
-        	}
-        }
+			$searchConditions = array('PackageCategory.id = '.$packageCategory,
+									  'Package.status' => 'APPROVED' );
+			}
 		
         $this->paginate['Package']['order'] = 'Package.created DESC';
         $this->paginate['Package']['limit'] = 3;
-        $this->paginate['Package']['conditions'] = array(
-            'Package.status' => 'APPROVED',
-            'AND' => array(
-                array(
-                    'AND' => array($search_condition),
-                ),
-                /*array(
-                    'OR' => array(
-                        'Package.visibility_roles' => '',
-                        'Package.visibility_roles LIKE' => '%"' . $this->Croogo->roleId . '"%',
-                    ),
-                ),*/
-            ),
-        );
+        $this->paginate['Package']['conditions'] = array($searchConditions);
      
         $this->paginate['Package']['joins'] = array(
 	          	array(
 		            'table' => 'package_availabilities', 'type' => 'INNER' , 'alias' => 'PackageAvailability' , 'conditions' => array(
-	                'PackageAvailability.package_id = Package.id','PackageAvailability.end_date > now()',
+	                'PackageAvailability.package_id = Package.id',"PackageAvailability.start_date > ? " => $arrival
             	)));
         //$this->paginate['url']['city'] = "&city=".$city;
         
         $packages = $this->paginate('Package');
 	//debug($packages);	
-        $cat_name = $this->Package->PackageCategory->read(null, $q);
+        $cat_name = $this->Package->PackageCategory->read(null, $packageCategory);
         $this->set('cat_name',$cat_name);
         $this->set('title_for_layout', sprintf(__('Search Results: %s', true), $cat_name['PackageCategory']['name']));
         $this->set(compact('packages', 'packages'));
         
         $packageCategories = $this->Package->PackageCategory->find('list');
-	$this->set('packageCategories',$packageCategories);
+		$this->set('packageCategories',$packageCategories);
     }
     
 	public function search_api() {

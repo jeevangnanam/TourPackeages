@@ -30,14 +30,7 @@
 	});
 	
 	$(function() {
-		$( "#checkin" ).datepicker({
-			numberOfMonths: 3,
-			showButtonPanel: true
-		});
-		$( "#checkout" ).datepicker({
-			numberOfMonths: 3,
-			showButtonPanel: true
-		});
+
 		$( "#slider-range" ).slider({
 			range: true,
 			min: 100,
@@ -84,7 +77,7 @@
       <div class="col-padding">
         <div class="wrapper">
           <h2>
-            <?php __($cat_name['PackageCategory']['name']);?>
+           
           </h2>
           <div class="grid_8 maxheight4">
           
@@ -111,10 +104,11 @@
           <!-- <p class="slide"><a href="#" class="btn-slide">Search Packages</a></p>-->
           
           <div id="packages_only" class="" style="float: right; width: 655px; padding-left:10px;">
-            <div class="border paddingb14 grid_15 prefix_1 maxheight4">
+            <div class=" paddingb14 grid_15 prefix_1 maxheight4">
               <h3 class="indent-bot">Packages</h3>
               <div class="column-indent">
                 <div style="clear: both; padding-top: 20px;">
+                <!--
                   <p class="paging_p">
                     <?php
 		echo $this->Paginator->counter(array(
@@ -127,6 +121,7 @@
 			echo $this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled'));?>
                     | <?php echo $this->Paginator->numbers();?> | <?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?> </div>
                 </div>
+                -->
                 <?php
 	$i = 0;
 	
@@ -176,8 +171,8 @@
                   </p>
                   <div class="paging">
                     <?php //$paginator->options(array('url' => $this->params['url']['city']."&q=".$this->params['named']['q'])); 
-			echo $this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled'));?>
-                    | <?php echo $this->Paginator->numbers();?> | <?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?> </div>
+			echo $this->Paginator->prev('<< ' . __('Previous', true), array(), null, array('class'=>'disabled'));?>
+                     <?php echo $this->Paginator->numbers();?>  <?php echo $this->Paginator->next(__('Next', true) . ' >>', array(), null, array('class' => 'disabled'));?> </div>
                 </div>
               </div>
             </div>

@@ -38,6 +38,7 @@ class SearchController extends AppController {
 	}
 	
 	public function search(){
+	
 		App::import('Core', 'Sanitize');
 		//debug($this->params);
 	}
