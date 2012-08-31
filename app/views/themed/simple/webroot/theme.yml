@@ -1,0 +1,13 @@
+name: Simple
+description: Simple theme for Croogo
+screenshot: screenshot.png
+
+author: Andrew Weir
+authorEmail: andru.weir@gmail.com
+authorUrl: http://andrw.net
+
+menus:
+  - main
+
+regions:
+  - right

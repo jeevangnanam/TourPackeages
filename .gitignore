@@ -1,0 +1,12 @@
+
+/app/tmp
+/app/tmp
+/app/tmp/logs
+/app/tmp/tests/.DS_Store
+/app/tmp/tests/empty
+/app/tmp/logs/.DS_Store
+/app/tmp/logs/debug.log
+/app/tmp/logs/empty
+/app/tmp/logs/error.log
+/_notes/*
+/DS_Store*
