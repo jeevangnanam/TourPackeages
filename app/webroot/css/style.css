@@ -610,7 +610,7 @@ h4 {
 }
 .rating {
 	background: #B0D1EC;
-	height:26px;
+	height:100px;
 	padding:5px 12px 10px 8px;
 	margin-bottom:8px;
 	overflow:visible !important;
@@ -1085,12 +1085,13 @@ div.paging {
 	margin: 30px;
 }
 .paging_p {
-	font-size:10px;
+	font-size:11px;
 	color: #666666;
 	text-align:center;
 	padding: 3px;
-	background:#FDEECC;
-	border-radius:2px;
+	background:#DEEAFC;
+	border-radius:3px;
+	text-shadow: 1px 1px 1px white;
 }
 span.disabled {
 background: rgb(204,204,204); /* Old browsers */
@@ -1171,7 +1172,7 @@ span a {
 	border-radius:2px;
 	text-decoration:none;
 	color:#FFFFFF;*/
-
+text-decoration:none;
 	}
 a.next {
 	

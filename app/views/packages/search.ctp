@@ -135,14 +135,15 @@
 					echo $thumbnail; ?>
                     
                     <div class="rating" style="min-height:30px; width:170px !important;">
-                    	<span class="numb">&euro;<?php echo $package['Package']['price']?></span>
-                    	<span class="title"> Price</span>
                     	
-                        <span class="numb"><?php echo $package['Package']['max_people']?></span>
+                    	<span class="title"> PackagePrice</span>
+                        <span class="numb">&euro;<?php echo $package['Package']['price']?></span>
+                    	
+                        
                         <span class="title"> Max-People</span>
-                    </div>
-                    <div class="rating" style="min-height:30px; width:170px !important;">	
-                        <span class="numb"><?php echo $package['Package']['duration'];?> (days)</span>
+                        <span class="numb"><?php echo $package['Package']['max_people']?></span><br />
+                        <span class="title"> Duration</span>
+                        <span class="numb"><?php echo $package['Package']['duration'];?> (days)</span><br />
                         <span class="title"> Location(s)</span>
                         <script type="text/javascript">
 						$(document).ready(function(){
@@ -150,30 +151,36 @@
 						});
 						</script>
 	              		<span id="location_loader_<?php echo $package['Package']['id']?>" class="title">Loading...</span>
+                        
                     </div>
+                  
                     
                     
                     </figure>
                     <div class="info extra-wrap"> <strong class="heading"><?php echo $package['Package']['name'];?> <?php echo $package['Package']['duration']?> tour </strong><span class="heading" style="color:#F90; font-size:10px;">Valid Till: <?php echo date('F j, Y',strtotime($package['PackageAvailability'][0]['end_date']));?></span> <span class="block"><?php echo Sanitize::clean($package['Package']['short_description'], array('remove_html' => true,'connection' =>
 	'default','odd_spaces' => true,'encode' => true,'escape' =>false,'backslash' => true)); ?></span>
                       <div class="wrapper">  </div>
+                      <div class="buttons-indent2 fright">
+                                            <?php echo $this->Html->link('View Package',array('controller' => 'packages', 'action' => 'view', $package['Package']['id']),array('class' => 'link-2 button-1')); ?>
+                                             </div>
                       </div>
                   </div>
                 </div>
                 <?php endforeach; ?>
                 <div style="clear: both; padding-top: 20px;">
-                  <p class='paging_p'>
-                    <?php
-		echo $this->Paginator->counter(array(
-		'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-		));
-		?>
-                  </p>
+
                   <div class="paging">
                     <?php //$paginator->options(array('url' => $this->params['url']['city']."&q=".$this->params['named']['q'])); 
 			echo $this->Paginator->prev('<< ' . __('Previous', true), array(), null, array('class'=>'disabled'));?>
                      <?php echo $this->Paginator->numbers();?>  <?php echo $this->Paginator->next(__('Next', true) . ' >>', array(), null, array('class' => 'disabled'));?> </div>
                 </div>
+                                  <p class='paging_p'>
+                    <?php
+		echo $this->Paginator->counter(array(
+		'format' => __('Page %page% of %pages%, Showing %current% records out of %count% total', true)
+		));
+		?>
+                  </p>
               </div>
             </div>
           </div>

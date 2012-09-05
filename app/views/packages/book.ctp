@@ -181,15 +181,17 @@ if(@$this->params['named']['step'] != 2 && @$this->params['named']['step'] !=3 )
 			<?php }?>
 			</div></td>
   </tr>
-  <tr>
+ <!-- <tr>
     <td><?php __('Meal Plan'); ?></td>
     <td><?php echo $package['MealPlan']['name']?></td>
   </tr>
+ 
   <tr>
     <td> Room Type:</td>
     <td><?php echo $package['RoomType']['name']?></td>
   </tr>
   <tr>
+   -->
     <td>Location(s)</td>
     <td><?php foreach ($locations as $key=>$location){
 				echo $location."<br>";
@@ -207,7 +209,7 @@ if(@$this->params['named']['step'] != 2 && @$this->params['named']['step'] !=3 )
   <tr>
     <td><span class="select1">
       <?php 
-		echo $this->Form->input('additional_persons',array('type'=>'select','options'=>array('1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6'), 'empty' => 'Select'
+		echo $this->Form->input('additional_persons',array('type'=>'select','options'=>array('1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6'), 'empty' => $additionalPeople
 			));?>
     </span></td>
     <td><?php echo $this->Form->input('coupon',array('label'=>'Coupon(if any)'));?></td>
@@ -223,13 +225,16 @@ if(@$this->params['named']['step'] != 2 && @$this->params['named']['step'] !=3 )
 <?php echo $this->Form->create('Package',array('controller'=>'purchases' ,'action' => 'book/'.$package['Package']['id'].'/step:3','type' => 'post'));    ?>
 
 <table width="100%" class="tblorder">
-  
+  <!--
   <?php foreach ($vas as $key=>$va){?>
   <tr><td>
+  
             <div class="dwrap_div" id="dwrap_div_<?php echo $key?>">
             <input name="data[Vas][<?php echo $va['Va']['id'];?>]" id="CheckBox<?php echo $key?>" type="checkbox" class="CheckBoxClass" value="<?php echo $va['Va']['price'];?>" />
             <label id="Label<?php echo $key?>" for="CheckBox<?php echo $key?>" class="CheckBoxLabelClass"><b><?php echo $va['Va']['name'];?></b></label>
             </div>
+            
+       
             </td>
             <td>
                 <span>Minimum People <?php echo $va['Va']['minimum'];?></span>
@@ -239,7 +244,7 @@ if(@$this->params['named']['step'] != 2 && @$this->params['named']['step'] !=3 )
                 <span><?php echo $va['Va']['description'];?></span></td>
             </tr>
         <?php }?>
-    
+         -->
       <tr>
         <td>Package</td>
         <td><?php  echo $package['Package']['name']?></td>
@@ -316,6 +321,7 @@ if(@$this->params['named']['step'] != 2 && @$this->params['named']['step'] !=3 )
         <td><?php echo $package['Package']['name']?></td>
          <?php echo $this->Form->input('package', array('type' => 'hidden','value' =>$package['Package']['name']));?>
       </tr>
+      
       <?php if (!empty($added_service)){?>
       <tr>
         <td>Value Added Services</td>

@@ -3,7 +3,7 @@
 <div class="container_24  ">
 <div class="col-padding">
 <div class="wrapper">
-<?php //echo $html->meta('description', 'Tour packages available from Mihin Lanka', array('type' => 'description', 'inline' => false)); ?>
+
 <?php 
 	echo $this->Html->script(array(
             'jquery/ui/jquery.ui.core',
@@ -111,16 +111,7 @@
                                 	  <?php echo $this->element('package_search'); ?>
                                 </div>
         
-        <!--<div style="clear:both;"></div>
-<div class="left_details_boxs">
-              <div class="contactlogo"><img title="" alt="" src="http://img1.yatra.com/images/holiday/phoneicon.jpg"></div>
-              <div class="contactno"><strong>Call our experts</strong><div style="font-size:13px; font-weight:bold; color:#656a70;"><table><tbody><tr><td>North &amp; East:</td><td>1860 5000 900</td></tr><tr><td>West:</td><td>1860 5000 018</td></tr><tr><td>South:</td><td>1860 5000 810</td></tr></tbody></table> </div></div>
-          </div>
-          
-          <div style="float:left; width:224px; margin-top:20px;">	<div class="optiontopimgs">	<div class="optionimgleft"><img alt="" src="http://video.tv18online.com/general/ytrimg/images/yatra_blue-theme/images/common/dealboxleft.gif"></div><div style="width:204px;" class="optionimgbg"><img alt="" src="http://video.tv18online.com/general/ytrimg/images/yatra_blue-theme/images/common/spacer.gif"></div><div class="optionimgright"><img alt="" src="http://video.tv18online.com/general/ytrimg/images/yatra_blue-theme/images/common/dealboxlright.gif"></div></div><div style="border-left:solid 1px #bababa; float:left; border-right:1px solid #bababa; width:202px; background-color:#ffffff;" class="optionmidbgs">	<div>	<div class="opt_formcon">	<div class="lfr-column">	<div id="layout-column_column-3" class="lfr-portlet-column">	<div class="portlet-boundary portlet-boundary_56_  portlet-journal-content" id="p_p_id_56_INSTANCE_bSXR_">	<a id="p_56_INSTANCE_bSXR"></a>	<div style="" class="portlet-borderless-container">	<div>	<div id="article_14_37373_1.0" class="journal-content-article">
-                    
-                    	<div class="yt_abouthanding">Life Leisure Holiday
-</div><div style="padding:10px 0px 4px 0px;"><table width="100%" cellspacing="1" cellpadding="1" border="0">     <tbody>         <tr><td><img width="92" height="31" src="http://img.yatra.com/image/image_gallery?uuid=8f980b48-913d-4a77-9ca6-9271256daaa9&amp;groupId=14&amp;t=1243928316991" alt=""></td></tr><tr><td>Walk into a Reliance World&nbsp; and book India's finest hotels. <a href="http://www.yatra.com/reliance-worlds.html">More...</a></td></tr><tr><td>&nbsp;</td></tr><tr><td><img width="93" height="40" src="http://img.yatra.com/image/image_gallery?uuid=aca04786-cfa1-46b0-a4d6-9f285546f6e1&amp;groupId=14&amp;t=1243928331223" alt=""></td></tr><tr><td>Book flights &amp; hotels at the nearest Hughes Net Fusion center. <a href="http://www.yatra.com/hughes-net.html">More...</a></td></tr><tr><td>&nbsp;</td></tr><tr><td><img width="101" height="33" src="http://img.yatra.com/image/image_gallery?uuid=05ee6fee-5bfe-4e4c-85d6-382eb63e23ee&amp;groupId=14&amp;t=1243928311168" alt=""></td></tr><tr><td>Walk in to any&nbsp; Sify iWay and book your flight tickets.</td></tr><tr><td>&nbsp;</td></tr><tr><td><img width="68" height="54" src="http://img.yatra.com/image/image_gallery?uuid=a9000c5a-c90e-4361-b937-2843c692d470&amp;groupId=14&amp;t=1243928339654" alt=""></td></tr><tr><td>Call our travel specialists at 0987 1800 800 (From All Networks)</td></tr></tbody> </table></div></div></div></div></div></div></div></div></div><div style="margin-top:16px; float:left;">	<div class="opt_formcon">	<div class="lfr-column">	<div id="layout-column_column-4" class="lfr-portlet-column empty"></div></div></div></div></div><div class="optiontopimgs">	<div class="optionimgleft"><img alt="" src="http://video.tv18online.com/general/ytrimg/images/yatra_blue-theme/images/common/dealboxbotleft.gif"></div><div style="width:204px;" class="optionimgbotbg"><img alt="" src="http://video.tv18online.com/general/ytrimg/images/yatra_blue-theme/images/common/spacer.gif"></div><div class="optionimgright"><img alt="" src="http://video.tv18online.com/general/ytrimg/images/yatra_blue-theme/images/common/dealboxbotright.gif"></div></div></div>-->
+
 
 	
 <div class="packages_view">
@@ -157,7 +148,7 @@
                             <ul>
                               <li style="padding-top:4px" class="step2inclusive">Starting from</li>
                               <li class="step2priceheading">USD :<span id="priceLarge"><?php echo $package['Package']['price']?></span></li>
-                              <li class="step2inclusive">All inclusive price per person</li>
+                              <li class="step2inclusive">All inclusive price per person,twin sharing basis.</li>
                             </ul>
                  
                               <div id="book_now_package" > 
@@ -191,20 +182,23 @@
       <!-- tab div end here-->
       <div class="reviewdeatilpannel">
         <div class="re_inclisionright">
+        
+        <?php /*
           <div class="w161">
             
             <div class="inclusionheading">Package Inclusions</div>
             
           </div>
+        
           <div class="inclusion_container">
             <ul>
-              <li><img align="absmiddle" src="http://img1.yatra.com/images/holiday/IBF.gif"> <?php echo $package['MealPlan']['name']?></li>
-              <li><img align="absmiddle" src="http://img1.yatra.com/images/holiday/ACO.gif"> Hotel Accommodation</li>
-              <li><img align="absmiddle" src="http://img1.yatra.com/images/holiday/themes_icon/sms_icon.gif"> <?php echo $package['RoomType']['name']?></li>
-              <li><img align="absmiddle" src="http://img1.yatra.com/images/holiday/themes_icon/fam_icon.gif" width="20px" height="20px"> Maximum <?php echo $package['Package']['max_people']?> People</li>
+              <li><img align="absmiddle" src="/img/icons/IBF.gif"> <?php echo $package['MealPlan']['name']?></li>
+              <li><img align="absmiddle" src="/img/icons/ACO.gif"> Hotel Accommodation</li>
+              <!--<li><img align="absmiddle" src="/img/icons/sms_icon.gif"> <?php echo $package['RoomType']['name']?></li> -->
+              <li><img align="absmiddle" src="/img/icons/fam_icon.gif" width="20px" height="20px">  <?php echo $package['Package']['max_people']?> <?php echo ($package['Package']['max_people'] ==1)?'Person':'People';?></li>
             </ul>
           </div>
-        
+         */ ?>  
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ class PackagesController extends AppController {
 	
 	var $uses = array('Package','Coupon','Purchase','PackageGallery','Location','Hotel','Va','PurchaseVa','PackageAvailability','Api');
 	
-	public $helpers = array('Html', 'Form', 'Filemanager', 'Text', 'Image','Javascript', 'Ajax','DatePicker');
+	public $helpers = array('Html', 'Form', 'Filemanager', 'Text', 'Image','Javascript', 'Ajax','DatePicker',);
 	
 	public $uploadsDir = 'uploads/packages/';
 	
@@ -65,6 +65,8 @@ class PackagesController extends AppController {
 	}
 
 	function view($id = null) {
+		echo $this->Session->read('adults');
+        
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid package', true));
 			$this->redirect(array('action' => 'index'));
@@ -290,6 +292,8 @@ class PackagesController extends AppController {
 		$children = Sanitize::clean($this->params['url']['children']);
 		$hotelType = Sanitize::clean($this->params['url']['hotel_type']);
         
+		
+		
 
 		//Little additional validity check on arrival date.
 		
@@ -441,6 +445,16 @@ var_dump($hotelType);*/
     
 	public function book($id = null){
 		//debug($this->Auth->user());
+		
+		 $adults = $this->Session->read('adults');
+		
+		if(isset($adults) and  $adults != ''){
+			
+			$this->set('additionalPeople', $this->Session->read('adults'));
+			}else{
+				
+			$this->set('additionalPeople', 'Select');	
+				}
 		if(empty($id)){
 			$this->Session->setFlash(__('Invalid Package', true), 'default', array('class' => 'flash_error'));
 			$this->redirect(array('controller'=>'packages', 'action' => 'index'));
