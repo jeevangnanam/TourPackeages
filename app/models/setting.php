@@ -171,5 +171,26 @@ class Setting extends AppModel {
         $listYaml = Spyc::YAMLDump($list, 4, 60);
         $file->write($listYaml);
     }
+	
+	public function getPackageSettings(){
+		
+		$this->recursive = -1;
+		$list = $this->find('list', array(
+            'fields' => array(
+                'key',
+                'value',
+            ),
+            'order' => array(
+                'Setting.key' => 'ASC',
+            ),
+			'conditions' => array(
+				
+				'key like' => 'package%'
+			)
+        ));
+		
+		return $list;
+	
+		}
 }
 ?>

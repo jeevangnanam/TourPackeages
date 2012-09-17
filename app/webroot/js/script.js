@@ -28,5 +28,58 @@ $(document).ready(function() {
 		
 //DatePicker Ends	
 
+
+
+
+//Package Meta Starts
+
+	//# Popultate meta key value
+	
+	 $(".editMetaList").click(function(){
+		 
+		 loadLoader($("#loader"));
+		 $.get('/package_metas/viewJson/'+$(this).attr('id'), function(data){
+			 removeLoader($("#loader"));
+			 data =  $.parseJSON(data);
+			 
+			 $('#metaMetaName').val(data.meta_name);
+			 $('#metaValue').val(data.value);
+			 
+			 });
+		 });
+
+
+    //# Delete meta key value
+	
+	$(".deleteMetaList").click(function(){
+		 
+		 loadLoader($("#loader"));
+		 id = $(this).attr('id');
+		 $.get('/package_metas/deleteJson/'+$(this).attr('id'), function(data){
+			 removeLoader($("#loader"));
+			 if(data == 'true'){
+			 rowId = "#metaRow_"+id;
+			 $(rowId).hide(2000);
+			 }
+			 });
+		 
+		 });
+
+
+//Package Meta Ends
 					
+					
+//Loader functions Start
+
+function loadLoader(onThisPlace){
+	
+	
+	$(onThisPlace).html("<img src='/img/icons/loading-small.gif' />");
+	}
+	
+function removeLoader(fronThisPlace){
+	$(fronThisPlace).html("");
+	}
+
+//Loader functions ends					
 }); 

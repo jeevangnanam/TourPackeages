@@ -531,6 +531,8 @@ class SettingsController extends AppController {
     }
 
     public function admin_index() {
+		
+		
         $this->set('title_for_layout', __('Settings', true));
 
         $this->Setting->recursive = 0;
@@ -540,6 +542,8 @@ class SettingsController extends AppController {
         }
         $this->set('settings', $this->paginate());
     }
+	
+	
 
     public function admin_view($id = null) {
         if (!$id) {

@@ -139,11 +139,11 @@ class DATABASE_CONFIG {
                     break;
 
                 default:
-                    $this->default = $this->prod;
+                    $this->default = $this->development;
                     break;
             }
         } else {
-            $this->default = $this->prod;
+            $this->default = $this->development;
         }
     }
 }

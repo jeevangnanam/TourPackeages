@@ -2,11 +2,15 @@
 Comment.date_time_format: M d, Y
 Comment.feed_limit: 10
 Comment.level: 1
-Hook.bootstraps: Tinymce.TinymceHook ,translate,Tinymce
+Display_buyout_price: 1
+Hook.bootstraps: TinyMCE ,translate,tinymce
 Meta.description: 'Croogo - A CakePHP powered Content Management System'
 Meta.generator: 'Croogo - Content Management System'
 Meta.keywords: croogo, Croogo
 Meta.robots: index, follow
+package.meta.default_price: DEFAULT_PRICE
+package.meta.nickname: PACKAGE_NICKNAME
+package.meta.show_default_price: SHOW_DEFAULT_PRICE
 Reading.date_time_format: D, M d Y H:i:s
 Reading.nodes_per_page: 5
 Service.akismet_key: your-key
@@ -21,4 +25,4 @@ Site.tagline:
 Site.theme: 
 Site.timezone: 0
 Site.title: Life Leisure Holiday
-Writing.wysiwyg: 1
+Writing.wysiwyg: 0

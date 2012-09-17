@@ -45,7 +45,7 @@
 		}
 		function hotel_info(){
 			//$('#hotel_info_link').click(function() {
-				$('#second').load('<?php echo $this->webroot;?>packages/hotelsInfo/<?php echo $package['Package']['hotel_ids']?>');
+			//	$('#second').load('<?php echo $this->webroot;?>packages/hotelsInfo/<?php echo $package['Package']['hotel_ids']?>');
 				      
 			//});
 		}
@@ -54,54 +54,7 @@
 		$('#search').jqTransform({imgPath:'jqtransformplugin/img/'});	
 	});
 		
-	$(function() {
-		$( "#checkin" ).datepicker({
-			numberOfMonths: 3,
-			showButtonPanel: true
-		});
-		$( "#checkout" ).datepicker({
-			numberOfMonths: 3,
-			showButtonPanel: true
-		});
-		
-		$( "#slider-range" ).slider({
-			range: true,
-			min: 100,
-			max: 3000,
-			values: [ 100, 3000 ],
-			slide: function( event, ui ) {
-				$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-				/*$.ajax({
-					type: "POST",
-					url: "/packages/index",
-					data: $("#search-form").serialize(),
-					success: function(responce){
-						//alert(responce);
-						$('#package_main_index').html(responce);
-					}
-				});
-				$("#package_main_index").empty().html('<img src="http://lifelh-dev.com/img/al_loading.gif" />');*/
-			}
-		});
-		$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-			" - $" + $( "#slider-range" ).slider( "values", 1 ) );
-	});
-	
-	$(function() {
-		$( "#slider-date_range" ).slider({
-			range: true,
-			min: 1,
-			max: 14,
-			step: 1,
-			values: [ 1, 14 ],
-			slide: function( event, ui ) {
-				$( "#date_range" ).val( "Date(s) " + ui.values[ 0 ] + " to Date(s)" + ui.values[ 1 ] );
-				
-			}
-		});
-		$( "#date_range" ).val( "Date(s) " + $( "#slider-date_range" ).slider( "values", 0 ) +
-			" - Date(s) " + $( "#slider-date_range" ).slider( "values", 1 ) );
-	});
+
 	
 	
 	
@@ -136,8 +89,7 @@
         <div id="packageImage">
         		    <div class="w503" style='margin-top: 10px;float:left;'>
 						  <?php 
-                          $thumbnail = $this->Image->resize('' . $package['Package']['default_map'], 500,150,'', 'class = ""');
-                          echo $thumbnail;
+                          echo "<img src='/".$package['Package']['default_map']."' />";
                           ?>
                     </div> 
         </div>
@@ -168,7 +120,7 @@
 
   <div class="tabs reviewdeatilpannel " id="tabs"> <span class="re_tabcontainer"> 
     <ul class="tabNavigation re_tabcontainer tabmidcontainer">
-      <li class="overview"><a style="width:129px;" href="#first" class="selected_tab">Overview</a></li>
+      <li class="overview"><a style="width:129px;" href="#first" class="selected_tab">Package Inclusions</a></li>
       <li class="hotelinfo"><a style="width:129px;" href="#second" class="" id="hotel_info_link" onclick="hotel_info();">Hotel Info</a></li>
       <li class="photogalary"><a style="width:129px;" href="#fourth" class="" id="ph_gallery" onclick="gallery_info();">Photo Gallery</a> </li>
       <li class="term_cond"><a style="width:129px;" href="#fifth" class="">Terms &amp; Conditions</a></li>
@@ -203,7 +155,36 @@
       </div>
     </div>
     <!-- =========================== Hotel Info =====================================-->
-    <div id="second" style="display: none; margin-top: 60px; background:#EFEFEF; border-radius:5px;"> Loading Hotels Info... </div>
+    <div id="second" style="display: none; margin-top: 60px; background:#EFEFEF; border-radius:5px;"> 
+    
+
+    <ul class="list">
+                              <li ><b>Colombo</b></li><br />
+                              	<ul>
+                                   <ol>One</ol>
+                                   <ol>Two</ol>
+                                   <ol>Three</ol>
+                                </ul><br />
+                              <li ><b>Kandy</b></li><br />
+                              	<ul>
+                                   <ol>One</ol>
+                                   <ol>Two</ol>
+                                   <ol>Three</ol>
+                                </ul><br />
+                              <li ><b>Arugambe</b></li><br />
+                              	<ul>
+                                   <ol>One</ol>
+                                   <ol>Two</ol>
+                                   <ol>Three</ol>
+                                </ul><br />
+                               <li ><b>Galle</b></li><br />
+                                 <ul>
+                                   <ol>One</ol>
+                                   <ol>Two</ol>
+                                   <ol>Three</ol>
+                                </ul><br />
+                            </ul>
+     </div>
     <!-- =========================== Inclusions =====================================-->
     <div id="third" style="display: none; margin-top: 20px;">  </div>
     <!-- =========================== Photo Galary =====================================-->

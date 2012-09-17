@@ -173,5 +173,26 @@ class Package extends AppModel {
 		)
 	
 	);
+	
+	function addPackageMeta($packageId){
+	
+	if(empty($packageId))return;
+	    $a;
+		$ref = Classregistry::init('Setting');
+		$packageMetaArray = ($ref->getPackageSettings());
+		$data = array();
+		foreach($packageMetaArray as $key=>$value){
+			++$a;
+			$data[$a]['PackageMeta']['package_id'] = $packageId;
+			$data[$a]['PackageMeta']['meta_name'] = $value; 
+			$data[$a]['PackageMeta']['meta_value'] = ''; 
+			
+			}
+		
+		return $ref = Classregistry::init('PackageMeta')->saveAll($data);
+	
+		}
+	
+	
 
 }

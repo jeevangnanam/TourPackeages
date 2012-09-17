@@ -25,6 +25,7 @@
             'jquery/thickbox-compressed',
 			'/fusion_charts/js/FusionCharts.js',
             'admin',
+			'script'
         ));
         echo $scripts_for_layout;
     ?>

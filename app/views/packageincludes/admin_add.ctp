@@ -1,0 +1,22 @@
+<div class="packageincludes form">
+<?php echo $this->Form->create('Packageinclude');?>
+	<fieldset>
+		<legend><?php __('Admin Add Packageinclude'); ?></legend>
+	<?php
+		echo $this->Form->input('package_id');
+		echo $this->Form->input('packageincludeitem_id');
+	?>
+	</fieldset>
+<?php echo $this->Form->end(__('Submit', true));?>
+</div>
+<div class="actions">
+	<h3><?php __('Actions'); ?></h3>
+	<ul>
+
+		<li><?php echo $this->Html->link(__('List Packageincludes', true), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('List Packages', true), array('controller' => 'packages', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Package', true), array('controller' => 'packages', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Packageincludeitems', true), array('controller' => 'packageincludeitems', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Packageincludeitem', true), array('controller' => 'packageincludeitems', 'action' => 'add')); ?> </li>
+	</ul>
+</div>

@@ -203,7 +203,7 @@
                                                 <a href="#" class="link-3">View More Videos</a>
                                              </div>
                                     </div>
-                                    <div class="grid_10 maxheight1 omega" style="background: #FFC; margin:10px; padding:15px; border-radius:5px;">
+                                    <div class="grid_10 maxheight1 omega" style="background: #FFC; margin:10px; padding:15px; border-radius:5px;border:solid 1px yellow">
                                             <h4 class="indent-bot"><strong class="color-4">hot</strong> destinations</h4>
                                             <div class="text-container-3">
                                                 <p class="h4-indent">Bertase deleoa dipisg elitve stibulum cude enoserta kertyade bertis dendrit maurportade usceita varere meroserta kertasera lertyadres eras miatoque penatib emagnis keras miasertase:</p>

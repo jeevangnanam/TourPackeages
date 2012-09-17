@@ -2438,6 +2438,9 @@ div.rss-popup em {
 #packageImage{
 	
 	float:left;
+	width:500px;
+	height:160px;
+	overflow:hidden;
 	}
 #packageImagePriceHolder{
 	float:left;
@@ -2449,13 +2452,16 @@ div.rss-popup em {
 	}
 #package_description{
 	float: left; 
-	width: 430px; 
+	width: 99%;
 	padding:15px 10px 15px 10px; 
 	background: #EFEFEF; 
 	margin-top:20px; 
 	margin-right:10px; 
 	border-radius:5px
 	}
+	#package_description p{
+		margin:10px;
+		}
 .packageHotelInfo{
 	
 	display: none; 

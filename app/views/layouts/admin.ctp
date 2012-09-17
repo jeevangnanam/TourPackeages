@@ -26,11 +26,12 @@
             'jquery/jquery.tipsy',
             'jquery/jquery.elastic-1.6.1.js',
             'jquery/thickbox-compressed',
-            'tinymce/webroot/js/tiny_mce.js',
+            'tinymce/jscripts/tiny_mce/tiny_mce.js',
             'admin',
         	'date',
         	'jquery.datePicker',
         	'cake.datePicker',
+			'script'
 		
         ));
            
@@ -70,4 +71,4 @@
     </body>
 </html>
 
-<?php //echo $this->element('sql_dump'); ?>
+<?php echo $this->element('sql_dump'); ?>

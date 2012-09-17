@@ -5,7 +5,7 @@ class PackagesController extends AppController {
 	
 	var $components = array('Autocomplete','Image','RequestHandler');
 	
-	var $uses = array('Package','Coupon','Purchase','PackageGallery','Location','Hotel','Va','PurchaseVa','PackageAvailability','Api');
+	var $uses = array('Package','Coupon','Purchase','PackageGallery','Location','Hotel','Va','PurchaseVa','PackageAvailability','Api','PackageMeta');
 	
 	public $helpers = array('Html', 'Form', 'Filemanager', 'Text', 'Image','Javascript', 'Ajax','DatePicker',);
 	
@@ -93,14 +93,16 @@ class PackagesController extends AppController {
 	}
 	
 	function admin_add() {
-		//debug($this->data);
+		
+		
 		if (!empty($this->data)) {
                          if (isset($this->data['Location'])) {
+				$location_ids;
 			foreach($this->data['Location'] as $key=>$location){
-				$location_ids.= $location.",";
+				$location_ids .= ",".$location;
 			}
                         }
-			@$location_ids = substr($location_ids, 0, -1); 
+			//@$location_ids = substr($location_ids, 0, -1); 
 
 			$this->data['Package']['location_ids'] = $location_ids;
 			
@@ -124,13 +126,15 @@ class PackagesController extends AppController {
 	        }
 	        
 			$this->Package->create();
-			//debug($this->data);
+			
+			debug($this->data);
 			if ($this->Package->save($this->data)) {
+				$this->Package->addPackageMeta($this->Package->getInsertID());
 				$this->data['PackageAvailability']['package_id'] = $this->Package->getInsertID();
 				$this->PackageAvailability->create();
 				$this->PackageAvailability->save($this->data);
 				
-				$this->saveMeta($this->Package->getInsertID(),array($this->data['meta']['meta_name'],$this->data['meta']['value']),false);
+				$this->saveMeta($this->Package->getInsertID(),array($this->data['meta']['meta_name'],$this->data['meta']['value']),true);
 				$this->Session->setFlash(__('The package has been saved', true));
 				$this->addImages($this->Package->getInsertID(),false);
 				$this->redirect(array('action' => 'index'));
@@ -185,7 +189,7 @@ class PackagesController extends AppController {
 			if ($this->Package->save($this->data)){
 				$this->data['PackageAvailability']['package_id'] = $id;
 				$this->PackageAvailability->save($this->data,false);
-				$this->saveMeta($id ,array($this->data['meta']['meta_name'],$this->data['meta']['value']),true);
+				$this->saveMeta($id ,array($this->data['meta']['meta_name'],$this->data['meta']['value']),false);
 				$this->Session->setFlash(__('The package has been saved', true));
 				//debug($this->addImages($id,true));
 				$this->redirect(array('action' => 'index'));
@@ -213,7 +217,9 @@ class PackagesController extends AppController {
 		$roomTypes = $this->Package->RoomType->find('list');
 		$mealPlans = $this->Package->MealPlan->find('list');
 		$packageCategories = $this->Package->PackageCategory->find('list');
-		$this->set(compact('locations', 'hotels', 'roomTypes','mealPlans','packageCategories','getSavedLocations','package_gallery_img'));
+		$this->PackageMeta->recursive = -1;
+		$packageMeta =  $this->PackageMeta->find('all',array('conditions' => array('package_id' => $id)));
+		$this->set(compact('locations', 'hotels', 'roomTypes','mealPlans','packageCategories','getSavedLocations','package_gallery_img','packageMeta'));
 	}
 
 	function admin_delete($id = null) {
@@ -575,17 +581,38 @@ var_dump($hotelType);*/
 		//$this->layout = 'ajax';
 	}
 	
-	function saveMeta($last_id,$post,$update){
+	function saveMeta($packageId,$data,$add){
 		//debug($post);
 		//echo $update;
-		if($update==false){
-			$this->Hotel->query("insert into package_metas (package_id , meta_name , value) values($last_id,'".$post[0]."','".$post[1]."')");
-		}
-		if($update == TRUE){
-			$this->Hotel->query("update package_metas set meta_name='".$post[0]."', value='".$post[1]."' where package_id=$last_id");
+		
+		if($data[0] == '' or $data[1] == '')return false;
+		if($add == '' or $add == NULL)$add=true;
+		$isMetaExists =	$this->isMetaExists($packageId,$data[0]);
+		
+		if($add==true and !$isMetaExists){
+		
+			$this->Hotel->query("insert into package_metas (package_id , meta_name , value) values($packageId,'".$data[0]."','".$data[1]."')");
+		}else{
+		
+			$this->Hotel->query("update package_metas set meta_name='".$data[0]."', value='".$data[1]."' where package_id=$packageId and meta_name = '".$data[0]."' ");
 		}
 	}
 	
+	function isMetaExists($packageId,$key){
+		
+		
+			if(isset($packageId) && isset($key)){
+				$this->PackageMeta->recursive = -1;
+				$res	=	$this->PackageMeta->find('all',array('conditions' => array('package_id' => $packageId,'meta_name' => $key)));
+					if(count($res)=== 0){
+						return false;
+						
+						}else{
+							return true;
+							}
+				}
+				return false;
+		}
 	function savePackageGallery($last_id,$post,$update){
 		//debug($post);
 		//echo $update;

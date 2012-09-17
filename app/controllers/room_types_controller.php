@@ -17,6 +17,7 @@ class RoomTypesController extends AppController {
 	}
 
 	function admin_add() {
+		
 		if (!empty($this->data)) {
 			$this->RoomType->create();
 			if ($this->RoomType->save($this->data)) {
@@ -31,6 +32,7 @@ class RoomTypesController extends AppController {
 	}
 
 	function admin_edit($id = null) {
+	
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid room type', true));
 			$this->redirect(array('action' => 'index'));
